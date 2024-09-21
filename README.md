@@ -16,7 +16,7 @@ Python, R, SQL, Machine Learning, PowerBI, Tableau, MS Office, Jupyter Notebook,
 [Health Condition Predictor Model](https://github.com/wuahmartor/portfolio/blob/main/diseasePredictionSystem/disease_prediction.ipynb): Machine learning model predicts a health condition based on patient's symptoms and recommend first-aid precautions
 
 
-[Try Web Interface](https://github.com/wuahmartor/portfolio/commit/68a723a558ad2dd93c63d09d421dcc6a022a1301)
+[Try Web Interface]( http://192.168.12.76:8501)
 
 
 
