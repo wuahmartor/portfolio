@@ -2,7 +2,7 @@
 # Welcome to Reuben's Portfolio
 
 
-
+![recent photo](https://github.com/wuahmartor/portfolio/blob/main/reuben_photo.png?raw=true)
 ## About Me
 Hi, I'm Reuben! I'm a registered nurse and an aspiring Data Scientist with an MS in Data Science. After several years working in nursing in various nursing specialties,I chose to pursue a technical degree in data science to help improve some of the lapses I have found in the healthcare industry. 
 
