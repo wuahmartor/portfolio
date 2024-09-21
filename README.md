@@ -34,3 +34,9 @@ https://github.com/wuahmartor/portfolio/blob/main/foodQualityDetectionSystem/foo
 
 ## Cardiac Event Risk Determination in Patient with Heart Failure 
 [Cardiac Event Dectection Model](https://github.com/wuahmartor/portfolio/blob/main/heartFailurePredictionModel/heartFailurePrediction.ipynb): Model uses certain health parameters to predict patient's chance of developing a cardiac even given the patient has a heart failure. 
+
+
+## Place holder for another Project
+
+## Place holder for another Project
+
