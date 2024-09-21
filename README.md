@@ -1,5 +1,5 @@
 
-# My Data Science Projects 
+# Welcome to Reuben's Portfolio
 
 
 
@@ -10,8 +10,8 @@ Hi, I'm Reuben! I'm a registered nurse and an aspiring graduate with an MS in Da
 ## 🛠 Skills
 Python, R, SQL, Machine Learning, PowerBI, Tableau, MS Office, Jupyter Notebook, Basic HTML Streamlit, Computer network, Hardware, Windows Server Active Directory concepts (Microsoft Certifed System Engineer on Windows Server 2003), Nursing Skills, Medical Case Management
 
+# Projects Undertaken:
 
-## 
 ## Health Condition Prediction Model 
 [Health Condition Predictor Model](https://github.com/wuahmartor/portfolio/blob/main/diseasePredictionSystem/disease_prediction.ipynb): Machine learning model predicts a health condition based on patient's symptoms and recommend first-aid precautions
 
