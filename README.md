@@ -3,7 +3,8 @@
 
 
 
-## 🚀 About Me
+## ![image](https://github.com/user-attachments/assets/09538213-96c3-427e-b5d9-78846a1248f6)
+ About Me
 Hi, I'm Reuben! I'm a registered nurse and an aspiring Data Scientist with an MS in Data Science. After several years working in nursing in various nursing specialties,I chose to pursue a technical degree in data science to help improve some of the lapses I have found in the healthcare industry. 
 
 
