@@ -33,4 +33,14 @@ https://github.com/wuahmartor/portfolio/blob/main/foodQualityDetectionSystem/foo
 
 
 ## Cardiac Event Risk Determination in Patient with Heart Failure 
+Project Overview:
+
+This project aims to develop a predictive model using machine learning techniques to assess the risk of cardiac events in patients diagnosed with heart failure. By analyzing clinical data, including age, anemia status, enzyme levels, ejection fraction, blood pressure, and other vital health metrics, the model seeks to identify key predictors of cardiac events. The goal is to provide healthcare professionals with a tool to understand the risk factors better and to aid in early intervention and personalized treatment plans for at-risk patients. The outcome of this project has the potential to improve patient care, reduce mortality rates, and optimize healthcare resources by focusing attention on individuals with a higher likelihood of adverse events.
+
 [Cardiac Event Dectection Model](https://github.com/wuahmartor/portfolio/blob/main/heartFailurePredictionModel/heartFailurePrediction.ipynb): Model uses certain health parameters to predict patient's chance of developing a cardiac even given the patient has a heart failure. 
+
+
+## Place holder for another Project
+
+## Place holder for another Project
+
