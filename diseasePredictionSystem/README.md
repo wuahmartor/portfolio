@@ -1,7 +1,7 @@
 # Welcome to Disease or Health condition Prediction Model designed by Reuben Martor
 
 ## Title: Developing a Symptom-Based System for Disease Diagnosis and Precaution Recommendations in Resource-Limited Settings 
-1. Business Problem 
+### Business Problem 
 Accurate disease diagnosis is essential for timely treatment. However, in many developing countries and rural areas, limited access to diagnostic resources can delay or prevent accurate diagnoses, leading to incorrect treatments and adverse outcomes. In such environments, healthcare providers often rely solely on symptoms and patient history, which can increase the risk of misdiagnosis. 
 This project aims to address this issue by developing a machine learning-based system that leverages symptom data to assist healthcare providers in making more accurate diagnoses. The system will also recommend appropriate precautions and treatment options, providing a solution that is both accessible and effective in resource-constrained settings. 
 
