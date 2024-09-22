@@ -6,7 +6,7 @@
 
 
 
-#See other Models:
+# See other Models:
 ## Weather Information Reporting System- US 
 [Weather Information Reporting System](https://github.com/wuahmartor/portfolio/blob/main/weatherReportSystem/weatherReportSystem.py):
 The system retrieves weather information for Cities in the US. The user may choose to look up weather report by inputing City Name or Zip Code
