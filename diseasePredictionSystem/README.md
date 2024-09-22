@@ -1,4 +1,4 @@
-Welcome to Disease or Health condition Prediction Model designed by Reuben Martor
+# Welcome to Disease or Health condition Prediction Model designed by Reuben Martor
 
 ## Health Condition Prediction Model 
 [Health Condition Predictor Model](https://github.com/wuahmartor/portfolio/blob/main/diseasePredictionSystem/disease_prediction.ipynb): Machine learning model predicts a health condition based on patient's symptoms and recommend first-aid precautions
