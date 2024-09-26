@@ -96,6 +96,9 @@ Python, R, SQL, Machine Learning, PowerBI, Tableau, MS Office, Jupyter Notebook,
 
 # Projects Undertaken:
 
+[Movie Recommender System]('https://github.com/wuahmartor/portfolio/blob/main/movieRecommender/movieRecommender.py')
+
+
 ## Health Condition Prediction Model 
 [Health Condition Predictor Model](https://github.com/wuahmartor/portfolio/blob/main/diseasePredictionSystem/disease_prediction.ipynb): Machine learning model predicts a health condition based on patient's symptoms and recommend first-aid precautions
 [Try Web Interface]( http://192.168.12.76:8501)
