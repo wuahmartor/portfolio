@@ -17,7 +17,7 @@ Python, R, SQL, Machine Learning, PowerBI, Tableau, MS Office, Jupyter Notebook,
 [Try Web Interface]( http://192.168.12.76:8501)
 
 
-
+[Movie Recommender System](https://github.com/wuahmartor/portfolio/blob/main/movieRecommender/movieRecommender.py)
 
 ## Weather Information Reporting System- US 
 [Weather Information Reporting System](https://github.com/wuahmartor/portfolio/blob/main/weatherReportSystem/weatherReportSystem.py):
