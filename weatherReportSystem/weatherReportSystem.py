@@ -2,9 +2,6 @@ import requests
 import json
 import datetime
 
-# DSC 510
-# Week 12
-# Programming Assignment Week 12 Final Project
 # Program purpose: Display weather data user for specified location( City or Zip)
 # Author: Reuben Martor
 # Date: 2/18/2023
