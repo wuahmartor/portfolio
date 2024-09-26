@@ -18,6 +18,7 @@ Python, R, SQL, Machine Learning, PowerBI, Tableau, MS Office, Jupyter Notebook,
 
 
 [Movie Recommender System](https://github.com/wuahmartor/portfolio/blob/main/movieRecommender/movieRecommender.py)
+This project is a Movie Recommender System built using Python and Streamlit. The system uses a content-based recommendation algorithm to suggest movies similar to the one selected by the user. It leverages the cosine similarity technique based on the genres, directors, and actors of the movies.
 
 ## Weather Information Reporting System- US 
 [Weather Information Reporting System](https://github.com/wuahmartor/portfolio/blob/main/weatherReportSystem/weatherReportSystem.py):
