@@ -6,7 +6,7 @@
 Hi, I'm Reuben! I am a registered nurse with extensive experience in various nursing specialties. Motivated by the challenges I encountered in healthcare, I earned an MS in Data Science. My goal is to use my technical skills to address and rectify the lapses I've identified in the healthcare industry.
 
 ## 🛠 Skills
-Nursing skills in various settings: Acute, long-term care facilities, Home Health, Occupational, and Medical Case management. R, SQL, Machine Learning, PowerBI, Tableau, MS Office, Jupyter Notebook, Basic HTML Streamlit, Computer network, Hardware, Windows Server Active Directory concepts (Microsoft Certified System Engineer on Windows Server 2003).
+Nursing skills in various settings: Acute, long-term care facilities, Home Health, Occupational, and Medical Case management. R, SQL, Machine Learning, PowerBI, Tableau, MS Office, Jupyter Notebook, Basic HTML, Streamlit, Computer network, Hardware, Windows Server Active Directory concepts (Microsoft Certified System Engineer on Windows Server 2003), and more.
 
 ## Projects Undertaken:
 
