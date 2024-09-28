@@ -11,7 +11,9 @@ Nursing skills in various settings: Acute, long-term care facilities, Home Healt
 ## Projects Undertaken:
 
 ### Health Condition Prediction Model 
-[Health Condition Predictor Model](https://github.com/wuahmartor/portfolio/blob/main/diseasePredictionSystem/disease_prediction.ipynb): Machine learning model predicts a health condition based on a patient's symptoms and recommends first-aid precautions
+[Health Condition Predictor Model](https://github.com/wuahmartor/portfolio/blob/main/diseasePredictionSystem/disease_prediction.ipynb): 
+[web interface](https://github.com/wuahmartor/portfolio/blob/main/diseasePredictionSystem/diseasePredictionStreamlit.py)
+Machine learning model predicts a health condition based on a patient's symptoms and recommends first-aid precautions
 
 
 ### Movie Recommender System
