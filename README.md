@@ -4,11 +4,10 @@
 
 ![recent photo](https://github.com/wuahmartor/portfolio/blob/main/reuben_photo.png?raw=true)
 ## About Me
-Hi, I'm Reuben! I'm a registered nurse and an aspiring Data Scientist with an MS in Data Science. After several years working in nursing in various nursing specialties,I chose to pursue a technical degree in data science to help improve some of the lapses I have found in the healthcare industry. 
-
+Hi, I'm Reuben! I am a registered nurse with extensive experience in various nursing specialties. Motivated by the challenges I encountered in healthcare, I earned an MS in Data Science. My goal is to use my technical skills to address and rectify the lapses I've identified in the healthcare industry.
 
 ## 🛠 Skills
-Python, R, SQL, Machine Learning, PowerBI, Tableau, MS Office, Jupyter Notebook, Basic HTML Streamlit, Computer network, Hardware, Windows Server Active Directory concepts (Microsoft Certifed System Engineer on Windows Server 2003), Nursing Skills, Medical Case Management
+Nursing skills in various settings: Acute, long-term care facilities, Home Health, Occupational, and Medical Case management. R, SQL, Machine Learning, PowerBI, Tableau, MS Office, Jupyter Notebook, Basic HTML Streamlit, Computer network, Hardware, Windows Server Active Directory concepts (Microsoft Certified System Engineer on Windows Server 2003).
 
 ## Projects Undertaken:
 
