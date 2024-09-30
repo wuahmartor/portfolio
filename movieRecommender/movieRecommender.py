@@ -4,6 +4,7 @@ import numpy as np
 from sklearn.metrics.pairwise import cosine_similarity
 from sklearn.feature_extraction.text import CountVectorizer
 import streamlit as st
+st.set_page_config(layout='wide')
 
 pd.set_option('display.max_columns', 15)
 # Load the dataset
