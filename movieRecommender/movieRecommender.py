@@ -6,7 +6,6 @@ from sklearn.feature_extraction.text import CountVectorizer
 import streamlit as st
 
 pd.set_option('display.max_columns', 15)
-st.set_page_config(layout="wide")
 # Load the dataset
 @st.cache_data
 def load_data():
