@@ -67,7 +67,7 @@ def main():
 
     # Build the recommender model
     cosine_sim = build_recommender(df)
-    entry_col, display_col = st.columns(2)
+    entry_col, display_col, extra_col = st.columns(3)
     # User input: Enter at least 4 characters to search for a movie
     with entry_col:
         search_query = st.text_input('Enter at least 4 characters of the movie title you wish to search:')
