@@ -282,3 +282,4 @@ zict==3.0.0
 zipp==3.17.0
 zope.event==5.0
 zope.interface==6.1
+pyqtwebengine-qt5==5.15.2
