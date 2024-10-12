@@ -3,7 +3,7 @@ import sqlite3
 import pandas as pd
 from utils import create_secure_connection
 
-conn = create_secure_connection('./ohs_inventory')
+conn = create_secure_connection('https://github.com/wuahmartor/portfolio/blob/main/inventoryManagement/ohs_inventory')
 # Function to fetch unique items from the database
 def fetch_unique_items(conn):
     query = "SELECT DISTINCT description FROM item"
