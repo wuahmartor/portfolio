@@ -2,5 +2,4 @@ streamlit
 pandas
 matplotlib
 streamlit-option-menu
-sqlite3  # (Optional, sqlite3 is usually included in Python)
 scikit-learn
