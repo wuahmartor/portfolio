@@ -59,7 +59,7 @@ def display_all_items(conn):
 
 # if __name__ == "__main__":
 #     # Path to your SQLite database file
-#     database_file = "ohs_inventory.db"
+#     database_file = "inventory.db"
 #
 #     # Create a secure connection to the database
 #     conn = create_secure_connection(database_file)
