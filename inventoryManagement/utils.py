@@ -86,7 +86,8 @@ def delete_inventory():
     # Add your code to delete items from the inventory
 
 def display_item_category(category):
-    pass
+   pass
 
 def display_item(item):
     pass
+

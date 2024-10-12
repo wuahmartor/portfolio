@@ -6,10 +6,11 @@ from streamlit_option_menu import option_menu
 
 # Set the page configuration
 st.set_page_config(page_title="OHS Inventory Management", layout="wide")
-
+from update_inventory import *
+from view_inventory import *
+from use_model import *
+from create_order import *
 # Import page functions from the pages directory
-import update_inventory, view_inventory, use_model, create_order
-from use_model import model_based_recommendations
 from utils import *
 
 # Users for authentication (for demonstration purposes)
@@ -114,18 +115,18 @@ def main():
 
         # Link each menu item to the respective page
         if choice == "View Inventory":
-            view_inventory.app()
+            view_inventory()
         elif choice == "Update Inventory":
             # Only allow "admin" users to update the inventory
             if st.session_state["role"] == "admin":
                 st.write('Use left sidebar to select option')
-                update_inventory.app()
+                update_inventory()
             else:
                 st.warning("You do not have permission to update the inventory.")
         elif choice == "Use Model":
             model_based_recommendations()
         elif choice == "Create Order":
-            create_order.app()
+            create_order()
 
 # Run the app
 if __name__ == '__main__':

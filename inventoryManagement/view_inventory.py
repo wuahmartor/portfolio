@@ -1,6 +1,7 @@
 import streamlit as st
 from utils import *
 import sqlite3
+
 # Streamlit interface
 
 # Function to fetch unique items from the database
@@ -8,6 +9,7 @@ import sqlite3
 # Function to fetch unique items from the database
 # Function to fetch unique items from the database
 
+conn = create_secure_connection(db_file="ohs_inventory")
 def fetch_unique_items(conn):
     query = "SELECT DISTINCT description FROM item"
     result = pd.read_sql_query(query, conn)
@@ -16,6 +18,7 @@ def fetch_unique_items(conn):
     result = result.loc[:, ~result.columns.duplicated()]
 
     return result['description'].tolist()
+
 
 # Function to fetch unique categories from the database
 def fetch_unique_categories(conn):
@@ -26,6 +29,7 @@ def fetch_unique_categories(conn):
     result = result.loc[:, ~result.columns.duplicated()]
 
     return result['category'].tolist()
+
 
 # Function to search items based on partial matches in description (up to 5 results)
 def search_similar_items(conn, search_query):
@@ -39,6 +43,7 @@ def search_similar_items(conn, search_query):
     result = result.loc[:, ~result.columns.duplicated()]
 
     return result
+
 
 # Function to search categories based on partial matches (up to 5 results)
 def search_similar_categories(conn, category_query):
@@ -55,8 +60,9 @@ def search_similar_categories(conn, category_query):
 
     return result
 
+
 # Streamlit interface
-def app():
+def view_inventory():
     st.title("Inventory Search")
 
     # Establish connection to the database
@@ -82,7 +88,6 @@ def app():
 
             # Add the search button directly under the item selection box
             search_clicked = st.button('Search')
-
 
     if search_option == 'Category' and selected_category and search_clicked:
         # Search for similar categories (partial match, max 5 results)

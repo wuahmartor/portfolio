@@ -1,6 +1,6 @@
 import streamlit as st
 
-def app():
+def create_order():
     st.title("Under construction")
     st.write("This is where you can create new orders.")
     # Add code to create orders
