@@ -7,6 +7,8 @@ import sqlite3
 # Function to fetch unique items from the database
 # Function to fetch unique items from the database
 # Function to fetch unique items from the database
+
+conn = create_secure_connection('ohs_inventory')
 def fetch_unique_items(conn):
     query = "SELECT DISTINCT description FROM item"
     result = pd.read_sql_query(query, conn)
@@ -59,8 +61,6 @@ def app():
     st.title("Inventory Search")
 
     # Establish connection to the database
-    conn = create_secure_connection('ohs_inventory')
-
     # Set up two columns: one smaller for the search box and button, one larger for results
     search_col, result_col = st.columns([1, 2])  # Search column is smaller, result column is larger
 
@@ -100,39 +100,3 @@ def app():
             st.write('Top 5 similar items:', result)
         else:
             st.warning('No similar items found.')
-#
-#
-# def app():
-#     st.title("View Inventory")
-#     conn = create_secure_connection('ohs_inventory')
-#
-#     # Set column sizes
-#     category_col, display_col = st.columns([1, 4])
-#
-#     with category_col:
-#         # Allow user to choose between searching by category or item
-#         search_option = st.radio('Search by:', ['Category', 'Item'], index=None)
-#
-#         # Based on the user's selection, display a dropdown with either categories or items
-#         if search_option == 'Category':
-#             categories = df['category'].unique().tolist()  # Get unique categories
-#             selected_category = st.selectbox('Select Category', categories)
-#         elif search_option == 'Item':
-#             items = df['description'].unique().tolist()  # Get unique item descriptions
-#             selected_item = st.selectbox('Select Item', items)
-#
-#     # Display the recommended items based on selected option
-#     with display_col:
-#         if search_option == 'Category' and selected_category:
-#             st.markdown(f'### Recommended Items in Category: {selected_category}')
-#             # Get recommendations based on category
-#             recommended_items = recommend_items(selected_category, df, tfidf_matrix)
-#             st.write(recommended_items[
-#                          ['description', 'category', 'unit', 'lastOrdered', 'quantityOrdered', 'manufacturer']])
-#
-#         elif search_option == 'Item' and selected_item:
-#             st.markdown(f'### Recommended Items Based on Item: {selected_item}')
-#             # Get recommendations based on item
-#             recommended_items = recommend_items(selected_item, df, tfidf_matrix)
-#             st.write(recommended_items[
-#                          ['description', 'category', 'unit', 'lastOrdered', 'quantityOrdered', 'manufacturer']])
