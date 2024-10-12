@@ -59,7 +59,7 @@ def app():
     st.title("Inventory Search")
 
     # Establish connection to the database
-    conn = create_secure_connection('ohs_inventory.db')
+    conn = create_secure_connection('ohs_inventory')
 
     # Set up two columns: one smaller for the search box and button, one larger for results
     search_col, result_col = st.columns([1, 2])  # Search column is smaller, result column is larger
