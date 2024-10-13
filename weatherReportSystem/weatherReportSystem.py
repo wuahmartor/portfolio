@@ -1,12 +1,11 @@
 import requests
 import datetime
 import streamlit as st
-import pandas as pd
 
-st.set_page_config(page_title="US Weather Info", layout="wide")
+# Set up page configuration
+st.set_page_config(page_title="Weather Information System", layout="wide")
 
-
-# Securely read the API key from a file
+# Cache the API key retrieval since it doesn't change
 @st.cache_data
 def get_api_key(file_path='ap_file.txt'):
     try:
@@ -17,147 +16,139 @@ def get_api_key(file_path='ap_file.txt'):
         st.error("API key file not found. Please ensure 'ap_file.txt' is present.")
         return None
 
-
+# Initialize the API key
 API_KEY = get_api_key()
 
-
-# Load and process city-zip data
-@st.cache_data
-def load_city_zip_data():
-    data = pd.read_excel('uscities.xlsx', sheet_name='uscities_zips')
-
-    # Handle NaN values in the 'zips' column and split by comma
-    data = data.dropna(subset=['zips'])  # Drop rows where 'zips' is NaN
-    data['zips'] = data['zips'].str.split(',').explode().str.strip()  # Split and explode
-
-    # Filter to ensure only valid 5-digit zip codes
-    data = data[data['zips'].str.match(r'^\d{5}$', na=False)]  # Avoid NaN-related errors
-
-    # Drop any remaining duplicates
-    valid_data = data[['city', 'state_id', 'zips']].drop_duplicates()
-    return valid_data
-
-
-uscity_zip = load_city_zip_data()
-
-
-# Display the current date and time
+# Function to display the current date and time
 def display_date():
     now = datetime.datetime.now()
     st.write(f"**Current date and time:** {now.strftime('%m-%d-%Y %H:%M:%S')}")
 
-
-# Make API request
+# Cache the results of HTTP requests to reduce redundant API calls
+@st.cache_data
 def request(url):
     try:
         response = requests.get(url)
         response.raise_for_status()
-        return response
+        return response.json()  # Return parsed JSON directly
     except requests.exceptions.RequestException as e:
-        st.error(f"HTTP connection issue: {e}")
+        st.error(f"HTTP connection problem: {e}")
+        return None
 
+# Function to choose temperature unit
+def choose_temp(unit_choice):
+    return {'Celsius': 'metric', 'Fahrenheit': 'imperial', 'Kelvin': 'standard'}.get(unit_choice, 'metric')
 
-# Select temperature unit
-def choose_temp(unit):
-    return {'Celsius': 'metric', 'Fahrenheit': 'imperial', 'Kelvin': 'standard'}.get(unit, 'standard')
+# Function to lookup weather by city name
+def geo_lookup_city(city_name, state_code, unit):
+    if not API_KEY:
+        return
+    url = f"http://api.openweathermap.org/geo/1.0/direct?q={city_name},{state_code},US&appid={API_KEY}"
+    city_info = request(url)
 
+    if city_info:
+        city_display = f"{city_info[0]['name']}, {city_info[0].get('state', state_code)}"
+        fetch_weather_data(city_info[0]['lat'], city_info[0]['lon'], unit, city_display)
 
-# Fetch and display weather data with city and state information
-def fetch_weather_data(latitude, longitude, unit, city_name=None, state_id=None):
-    url_weather = f"https://api.openweathermap.org/data/2.5/weather?lat={latitude}&lon={longitude}&appid={API_KEY}&units={unit}"
-    response = request(url_weather)
+# Function to get the state from Zippopotam API
+@st.cache_data
+def get_state_from_zip(zip_code):
+    url = f"https://api.zippopotam.us/us/{zip_code}"
+    data = request(url)
 
-    if response:
-        weather_data = response.json()
-        if weather_data.get('cod') == 200:
-            temp = weather_data['main']['temp']
-            feel_like = weather_data['main']['feels_like']
-            temp_min = weather_data['main']['temp_min']
-            temp_max = weather_data['main']['temp_max']
-            pressure = weather_data['main']['pressure']
-            humidity = weather_data['main']['humidity']
-            description = weather_data['weather'][0]['description']
-            wind_speed = weather_data['wind']['speed']
+    if data:
+        state = data['places'][0]['state abbreviation']
+        city = data['places'][0]['place name']
+        return city, state
+    return None, None
 
-            # Display weather data along with city and state
-            display_date()
-            st.markdown(
-                f"""
-                **City:** {city_name}, {state_id}  
-
-                **Temperature:** {temp}°  
-                **Feels Like:** {feel_like}°  
-                **High Temperature:** {temp_max}°  
-                **Low Temperature:** {temp_min}°  
-                **Pressure:** {pressure} hPa  
-                **Humidity:** {humidity}%  
-                **Description:** {description.capitalize()}  
-                **Wind Speed:** {wind_speed} m/s  
-                """, unsafe_allow_html=True
-            )
-        else:
-            st.error("City not found. Please try again.")
-
-
-# Lookup weather by city
-def geo_lookup_city(city_name, state_id, unit):
-    url = f"http://api.openweathermap.org/geo/1.0/direct?q={city_name},{state_id},US&appid={API_KEY}"
-    response = request(url)
-
-    if response:
-        city_data = response.json()
-        if city_data:
-            city_info = city_data[0]
-            latitude, longitude = city_info['lat'], city_info['lon']
-            # Pass the city_name and state_id to the fetch_weather_data function
-            fetch_weather_data(latitude, longitude, unit, city_name, state_id)
-        else:
-            st.error("Invalid city. Please select a valid US city.")
-
-
-# Lookup weather by zip code and display city and state
+# Function to lookup weather by zip code
 def geo_lookup_zip(zip_code, unit):
-    # Get city and state associated with the selected zip code
-    location = uscity_zip[uscity_zip['zips'] == zip_code].iloc[0]
-    city_name, state_id = location['city'], location['state_id']
-
+    if not API_KEY:
+        return
     url = f"http://api.openweathermap.org/geo/1.0/zip?zip={zip_code},US&appid={API_KEY}"
-    response = request(url)
+    zip_data = request(url)
 
-    if response:
-        zip_data = response.json()
-        latitude, longitude = zip_data['lat'], zip_data['lon']
-        fetch_weather_data(latitude, longitude, unit, city_name, state_id)
-    else:
-        st.error("Invalid zip code. Please select a valid US zip code.")
+    if zip_data:
+        city_name = zip_data.get('name', 'Unknown City')
+        state_code = zip_data.get('state', None)
 
+        if not state_code:  # Use fallback to Zippopotam API
+            city_name, state_code = get_state_from_zip(zip_code)
 
-# Streamlit main function
+        city_display = f"{city_name}, {state_code if state_code else 'Unknown State'}"
+        fetch_weather_data(zip_data['lat'], zip_data['lon'], unit, city_display)
+
+# Fetch and display weather data
+@st.cache_data
+def fetch_weather_data(latitude, longitude, unit, city_display):
+    url = f"https://api.openweathermap.org/data/2.5/weather?lat={latitude}&lon={longitude}&appid={API_KEY}&units={unit}"
+    weather_data = request(url)
+
+    if weather_data and weather_data.get('cod') == 200:
+        temp = weather_data['main']['temp']
+        feel_like = weather_data['main']['feels_like']
+        temp_max = weather_data['main']['temp_max']
+        temp_min = weather_data['main']['temp_min']
+        pressure = weather_data['main']['pressure']
+        humidity = weather_data['main']['humidity']
+        cloud_cover = weather_data['clouds']['all']
+        description = weather_data['weather'][0]['description']
+        wind_speed = weather_data['wind']['speed']
+
+        display_date()
+        st.subheader(f'Weather Information for {city_display}')
+        st.markdown(
+            f"""
+            **Temperature:** {temp}°  
+            **Feels Like:** {feel_like}°  
+            **High Temperature:** {temp_max}°  
+            **Low Temperature:** {temp_min}°  
+            **Pressure:** {pressure} hPa  
+            **Humidity:** {humidity}%  
+            **Cloud Cover:** {cloud_cover}%  
+            **Description:** {description.capitalize()}  
+            **Wind Speed:** {wind_speed} m/s  
+            """,
+            unsafe_allow_html=True,
+        )
+
+# Main function to run the Streamlit app
 def main():
-    st.title("US Weather Information System")
-    col1, col2 = st.columns(2)
+    st.title("Weather Information System")
 
-    # Sidebar options
+    # Sidebar for input selection
     lookup_choice = st.sidebar.radio("Select lookup method", ["City Name", "Zip Code"])
     unit_choice = st.sidebar.selectbox("Select Temperature Unit", ["Celsius", "Fahrenheit", "Kelvin"])
     unit = choose_temp(unit_choice)
 
     if lookup_choice == "City Name":
+        col1, col2, _ = st.columns([2, 1, 3])
+
         with col1:
-            city_name = st.selectbox("Select City", uscity_zip['city'].unique())
-            state_id = st.selectbox("Select State Code",
-                                    uscity_zip[uscity_zip['city'] == city_name]['state_id'].unique())
-            if st.button("Get Weather by City"):
-                geo_lookup_city(city_name, state_id, unit)
+            city_name = st.text_input("City Name:", max_chars=20, placeholder="e.g., New York")
+
+        with col2:
+            state_code = st.text_input("State Code:", max_chars=2, placeholder="e.g., NY")
+
+        if st.button("Get Weather by City"):
+            if city_name and state_code:
+                geo_lookup_city(city_name.strip(), state_code.strip(), unit)
+            else:
+                st.error("Please provide both city name and state code.")
 
     elif lookup_choice == "Zip Code":
+        col1, _ = st.columns([2, 4])
+
         with col1:
-            # Ensure only valid 5-digit zip codes are shown
-            zip_code = st.selectbox("Select Zip Code", uscity_zip['zips'].unique())
-            if st.button("Get Weather by Zip Code"):
+            zip_code = st.text_input("Zip Code:", max_chars=5, placeholder="e.g., 10001")
+
+        if st.button("Get Weather by Zip Code"):
+            if zip_code.isdigit() and len(zip_code) == 5:
                 geo_lookup_zip(zip_code, unit)
+            else:
+                st.error("Please provide a valid 5-digit zip code.")
 
-
-# Run the Streamlit app
+# Run the app
 if __name__ == '__main__':
     main()
