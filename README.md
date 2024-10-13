@@ -30,6 +30,7 @@ This project is a Movie Recommender System built using Python and Streamlit. The
 [Codes and Details](https://github.com/wuahmartor/portfolio/blob/main/movieRecommender/movieRecommender.py)
 
 
+
 ### Medical Supply Inventory Management System
 [Healthcare Supply Inventory Management System](https://portfolio-nohukkscvph5ayjyt9vwdl.streamlit.app/)
 [Codes and Details](https://github.com/wuahmartor/portfolio/blob/main/inventoryManagement/main_page.py)
@@ -39,14 +40,18 @@ This project is a Movie Recommender System built using Python and Streamlit. The
 The machine learning model predicts a health condition based on a patient's symptoms and recommends first-aid precautions
 
 [Health Condition Predictor Model-- web interface under constructions ]
+
 [Codes and Details](https://github.com/wuahmartor/portfolio/blob/main/diseasePredictionSystem/disease_prediction.ipynb): 
+
 
 
 ### Food Quality Detection System Model At a Meatpacking Plant
 Based on Meat indicated production factors, the model predicts the quality status of the meat as either being good or bad. 
 
 [Meat Quality Checker- web interface under constructions]
+
 [Codes and Details](https://github.com/wuahmartor/portfolio/blob/main/foodQualityDetectionSystem/foodQualityDectection.ipynb): 
+
 
 ### Cardiac Event Risk Determination in Patients with Heart Failure 
 #### Project Overview:
@@ -54,6 +59,7 @@ Based on Meat indicated production factors, the model predicts the quality statu
 This project aims to develop a predictive model using machine learning techniques to assess the risk of cardiac events in patients diagnosed with heart failure. By analyzing clinical data, including age, anemia status, enzyme levels, ejection fraction, blood pressure, and other vital health metrics, the model seeks to identify key predictors of cardiac events. The goal is to provide healthcare professionals with a tool to understand the risk factors better and to aid in early intervention and personalized treatment plans for at-risk patients. The outcome of this project has the potential to improve patient care, reduce mortality rates, and optimize healthcare resources by focusing attention on individuals with a higher likelihood of adverse events.
 
 [Cardiac Event Detection Model- web interface under construction]
+
 [Codes and Details](https://github.com/wuahmartor/portfolio/blob/main/heartFailurePredictionModel/heartFailurePrediction.ipynb) 
 
 
