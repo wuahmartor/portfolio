@@ -1,14 +1,15 @@
 import requests
+import datetime
 import streamlit as st
 import os
-
 # Set up page configuration
 st.set_page_config(page_title="Reuben's Weather Information System", layout="wide")
 
 # Cache the API key retrieval since it doesn't change
 @st.cache_data
+# Function to get the API key from Streamlit secrets or environment
 def get_api_key():
-    api_key = os.getenv('API_KEY')  # Fetch from environment/secrets
+    api_key = os.getenv('API_KEY')  # Fetch from secrets/environment
     if not api_key:
         st.error("API key not found. Please ensure it is correctly configured.")
     return api_key
@@ -16,19 +17,10 @@ def get_api_key():
 # Initialize the API key
 API_KEY = get_api_key()
 
-# Function to display the local date and time from the user's computer using JavaScript
-def display_local_date():
-    st.write("### Local Date and Time (From User's Device)")
-    # Injecting JavaScript to get the local time from the user's browser
-    st.components.v1.html(
-        """
-        <script>
-            const now = new Date();
-            document.write(`<h4>${now.toLocaleString()}</h4>`);
-        </script>
-        """,
-        height=50,
-    )
+# Function to display the current date and time
+def display_date():
+    now = datetime.datetime.now()
+    st.write(f"**Current date and time:** {now.strftime('%m-%d-%Y %H:%M:%S')}")
 
 # Cache the results of HTTP requests to reduce redundant API calls
 @st.cache_data
@@ -36,7 +28,7 @@ def request(url):
     try:
         response = requests.get(url)
         response.raise_for_status()
-        return response.json()
+        return response.json()  # Return parsed JSON directly
     except requests.exceptions.RequestException as e:
         st.error(f"HTTP connection problem: {e}")
         return None
@@ -56,7 +48,7 @@ def geo_lookup_city(city_name, state_code, unit):
         city_display = f"{city_info[0]['name']}, {city_info[0].get('state', state_code)}"
         fetch_weather_data(city_info[0]['lat'], city_info[0]['lon'], unit, city_display)
 
-# Function to get state from Zippopotam API
+# Function to get the state from Zippopotam API
 @st.cache_data
 def get_state_from_zip(zip_code):
     url = f"https://api.zippopotam.us/us/{zip_code}"
@@ -102,6 +94,7 @@ def fetch_weather_data(latitude, longitude, unit, city_display):
         description = weather_data['weather'][0]['description']
         wind_speed = weather_data['wind']['speed']
 
+        display_date()
         st.subheader(f'Weather Information for {city_display}')
         st.markdown(
             f"""
@@ -121,9 +114,6 @@ def fetch_weather_data(latitude, longitude, unit, city_display):
 # Main function to run the Streamlit app
 def main():
     st.title("Reuben's Weather Information System")
-
-    # Display the user's local date and time
-    display_local_date()
 
     # Sidebar for input selection
     lookup_choice = st.sidebar.radio("Select lookup method", ["City Name", "Zip Code"])
