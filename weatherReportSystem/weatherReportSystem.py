@@ -16,22 +16,6 @@ def get_api_key():
 API_KEY = get_api_key()
 
 # Function to display the local date and time using JavaScript
-def display_local_date():
-    st.write("### Local Date and Time (From Your Device)")
-    st.components.v1.html(
-        """
-        <div id="local-time"></div>
-        <script>
-            function updateTime() {
-                const now = new Date();
-                document.getElementById('local-time').innerHTML = 
-                    `<h4>${now.toLocaleString()}</h4>`;
-            }
-            setInterval(updateTime, 1000);  // Update every second
-        </script>
-        """,
-        height=50,
-    )
 
 # Cache the results of HTTP requests to reduce redundant API calls
 @st.cache_data
@@ -102,7 +86,6 @@ def fetch_weather_data(latitude, longitude, unit, city_display):
         wind_speed = weather_data['wind']['speed']
 
         st.subheader(f'Weather Information for {city_display}')
-        display_local_date()
         st.markdown(
             f"""
             **Temperature:** {temp}°  
