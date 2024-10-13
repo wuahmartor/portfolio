@@ -24,7 +24,7 @@ The system retrieves weather information for Cities in the US. The user may choo
 ### Medical Supply Inventory Management System
    [Healthcare Supply Inventory Management System](https://github.com/wuahmartor/portfolio/blob/main/inventoryManagement/main_page.py)
    
-   [web interface](https://portfolio-nohukkscvph5ayjyt9vwdl.streamlit.app)
+   [web interface](https://portfolio-nohukkscvph5ayjyt9vwdl.streamlit.app/)
 
 
 ### Movie Recommender System
