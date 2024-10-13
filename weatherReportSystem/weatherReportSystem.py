@@ -19,7 +19,7 @@ API_KEY = get_api_key()
 # Function to display the current date and time using Python's datetime
 def display_local_date():
     now = datetime.now()  # Get the current local time
-    st.write(f"### Current Date and Time: {now.strftime('%Y-%m-%d %H:%M:%S')}")
+    st.sidebar(st.write(f"### Current Date and Time: {now.strftime('%Y-%m-%d %H:%M:%S')}"))
 
 # Cache the results of HTTP requests to reduce redundant API calls
 @st.cache_data
@@ -94,7 +94,7 @@ def fetch_weather_data(latitude, longitude, unit, city_display):
         wind_speed = weather_data['wind']['speed']
 
         st.subheader(f'Weather Information for {city_display}')
-        st.sidebar.write(display_local_date())
+        display_local_date()
         st.markdown(
             f"""
             **Temperature:** {temp}°  
