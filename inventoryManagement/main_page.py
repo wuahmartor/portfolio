@@ -69,7 +69,7 @@ def main():
     if not st.session_state["logged_in"]:
         # Show login form in the sidebar
         with st.sidebar:
-            st.write("[want login info: visit read 'readme.rm' ](https://github.com/wuahmartor/portfolio/blob/main/inventoryManagement/main_page.py)")
+            st.write("[want login info: visit read 'readme.rm' ](https://github.com/wuahmartor/portfolio/blob/main/inventoryManagement/README.md)")
             st.subheader("Please login to access the system")
 
             # User input fields
