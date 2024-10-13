@@ -9,7 +9,7 @@ st.set_page_config(page_title="Weather Information System", layout="wide")
 @st.cache_data
 # Function to get the API key from Streamlit secrets or environment
 def get_api_key():
-    api_key = os.getenv('OPENWEATHERMAP_API_KEY')  # Fetch from secrets/environment
+    api_key = os.getenv('API_KEY')  # Fetch from secrets/environment
     if not api_key:
         st.error("API key not found. Please ensure it is correctly configured.")
     return api_key
