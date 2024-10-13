@@ -122,7 +122,7 @@ def fetch_weather_data(latitude, longitude, unit, city_display):
 
 # Main function to run the Streamlit app
 def main():
-    st.title("Weather Information System")
+    st.title("Reuben's Weather Information System")
 
     # Sidebar for input selection
     lookup_choice = st.sidebar.radio("Select lookup method", ["City Name", "Zip Code"])
