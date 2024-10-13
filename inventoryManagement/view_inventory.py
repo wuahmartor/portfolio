@@ -1,5 +1,6 @@
 import streamlit as st
-from utils import *
+from utils import create_secure_connection
+import pandas as pd
 import sqlite3
 
 # Streamlit interface
@@ -8,8 +9,7 @@ import sqlite3
 # Function to fetch unique items from the database
 # Function to fetch unique items from the database
 # Function to fetch unique items from the database
-
-conn = create_secure_connection(db_file="ohs_inventory")
+conn = create_secure_connection(db_file='ohs_inventory')
 def fetch_unique_items(conn):
     query = "SELECT DISTINCT description FROM item"
     result = pd.read_sql_query(query, conn)

@@ -21,6 +21,8 @@ def authenticate_user(username, password):
 
 
 def create_secure_connection(db_file):
+
+    db_file = "ohs_inventory"
     """
     Securely create a connection to the SQLite database after user authentication.
     """
