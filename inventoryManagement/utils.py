@@ -2,7 +2,7 @@ import sqlite3
 import getpass
 import streamlit as st
 import pandas as pd
-
+import os
 
 def authenticate_user(username, password):
     """
@@ -19,21 +19,19 @@ def authenticate_user(username, password):
         print("Authentication failed. Invalid username or password.")
         return False
 
-
-def create_secure_connection(db_file):
-
-    db_file = "ohs_inventory"
-    """
-    Securely create a connection to the SQLite database after user authentication.
-    """
-    conn = None
+def create_secure_connection():
+    """Create a secure connection to the SQLite database."""
     try:
-        # Ask for username and password before allowing access to the database
-        # Authenticate the user
-        conn = sqlite3.connect(db_file)
+        # Ensure the correct relative path to the database
+        db_path = os.path.join(os.path.dirname(__file__), 'ohs_inventory')
+
+        # Connect to the SQLite database
+        conn = sqlite3.connect(db_path)
+        print("Connected to the database successfully.")
+        return conn
     except sqlite3.Error as e:
-        print(f"Database connection error: {e}")
-    return conn
+        st.error(f"Database connection error: {e}")
+        return None
 
 # Displays category items from the 'category' table in the database.
 def display_category_items(conn):
