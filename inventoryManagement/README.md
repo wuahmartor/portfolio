@@ -1,4 +1,4 @@
-Welcome to the Streamlit Inventory Management System
+"### Welcome to the Streamlit Inventory Management System"
 
 This project is a comprehensive Inventory Management System built using Python and Streamlit. 
 It offers both SQL-based search functionality and model-based item recommendations to assist with efficient inventory management.
