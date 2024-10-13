@@ -1,20 +1,27 @@
 import requests
 import datetime
 import streamlit as st
-
+import os
 # Set up page configuration
 st.set_page_config(page_title="Weather Information System", layout="wide")
 
 # Cache the API key retrieval since it doesn't change
 @st.cache_data
-def get_api_key(file_path='ap_file.txt'):
-    try:
-        with open(file_path, 'r') as f:
-            api_key = f.read().strip()
-        return api_key
-    except FileNotFoundError:
-        st.error("API key file not found. Please ensure 'ap_file.txt' is present.")
-        return None
+# Function to get the API key from Streamlit secrets or environment
+def get_api_key():
+    api_key = os.getenv('OPENWEATHERMAP_API_KEY')  # Fetch from secrets/environment
+    if not api_key:
+        st.error("API key not found. Please ensure it is correctly configured.")
+    return api_key
+
+# def get_api_key(file_path='ap_file.txt'):
+#     try:
+#         with open(file_path, 'r') as f:
+#             api_key = f.read().strip()
+#         return api_key
+#     except FileNotFoundError:
+#         st.error("API key file not found. Please ensure 'ap_file.txt' is present.")
+#         return None
 
 # Initialize the API key
 API_KEY = get_api_key()
