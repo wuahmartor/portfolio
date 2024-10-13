@@ -119,9 +119,8 @@ def fetch_weather_data(latitude, longitude, unit, city_display):
 
 def main():
     st.title("Reuben's Weather Information System")
-
-    # Display the local date and time from the user's computer
     display_local_date()
+    # Display the local date and time from the user's computer
 
     # Sidebar input options
     lookup_choice = st.sidebar.radio("Select lookup method", ["City Name", "Zip Code"])
