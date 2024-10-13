@@ -5,6 +5,7 @@ import pandas as pd
 
 st.set_page_config(page_title="US Weather Info", layout="wide")
 
+
 # Securely read the API key from a file
 @st.cache_data
 def get_api_key(file_path='ap_file.txt'):
@@ -16,12 +17,14 @@ def get_api_key(file_path='ap_file.txt'):
         st.error("API key file not found. Please ensure 'ap_file.txt' is present.")
         return None
 
+
 API_KEY = get_api_key()
+
 
 # Load and process city-zip data
 @st.cache_data
 def load_city_zip_data():
-    data = pd.read_csv('uscities_zips.csv')
+    data = pd.read_excel('uscities.xlsx', sheet_name='uscities_zips')
 
     # Handle NaN values in the 'zips' column and split by comma
     data = data.dropna(subset=['zips'])  # Drop rows where 'zips' is NaN
@@ -34,12 +37,15 @@ def load_city_zip_data():
     valid_data = data[['city', 'state_id', 'zips']].drop_duplicates()
     return valid_data
 
+
 uscity_zip = load_city_zip_data()
+
 
 # Display the current date and time
 def display_date():
     now = datetime.datetime.now()
     st.write(f"**Current date and time:** {now.strftime('%m-%d-%Y %H:%M:%S')}")
+
 
 # Make API request
 def request(url):
@@ -50,9 +56,11 @@ def request(url):
     except requests.exceptions.RequestException as e:
         st.error(f"HTTP connection issue: {e}")
 
+
 # Select temperature unit
 def choose_temp(unit):
     return {'Celsius': 'metric', 'Fahrenheit': 'imperial', 'Kelvin': 'standard'}.get(unit, 'standard')
+
 
 # Fetch and display weather data with city and state information
 def fetch_weather_data(latitude, longitude, unit, city_name=None, state_id=None):
@@ -75,8 +83,8 @@ def fetch_weather_data(latitude, longitude, unit, city_name=None, state_id=None)
             display_date()
             st.markdown(
                 f"""
-                **City:** {city_name}, {state_id}\n  
-                
+                **City:** {city_name}, {state_id}  
+
                 **Temperature:** {temp}°  
                 **Feels Like:** {feel_like}°  
                 **High Temperature:** {temp_max}°  
@@ -89,6 +97,8 @@ def fetch_weather_data(latitude, longitude, unit, city_name=None, state_id=None)
             )
         else:
             st.error("City not found. Please try again.")
+
+
 # Lookup weather by city
 def geo_lookup_city(city_name, state_id, unit):
     url = f"http://api.openweathermap.org/geo/1.0/direct?q={city_name},{state_id},US&appid={API_KEY}"
@@ -99,10 +109,10 @@ def geo_lookup_city(city_name, state_id, unit):
         if city_data:
             city_info = city_data[0]
             latitude, longitude = city_info['lat'], city_info['lon']
-            fetch_weather_data(latitude, longitude, unit)
+            # Pass the city_name and state_id to the fetch_weather_data function
+            fetch_weather_data(latitude, longitude, unit, city_name, state_id)
         else:
             st.error("Invalid city. Please select a valid US city.")
-
 
 
 # Lookup weather by zip code and display city and state
@@ -121,6 +131,7 @@ def geo_lookup_zip(zip_code, unit):
     else:
         st.error("Invalid zip code. Please select a valid US zip code.")
 
+
 # Streamlit main function
 def main():
     st.title("US Weather Information System")
@@ -134,7 +145,8 @@ def main():
     if lookup_choice == "City Name":
         with col1:
             city_name = st.selectbox("Select City", uscity_zip['city'].unique())
-            state_id = st.selectbox("Select State Code", uscity_zip[uscity_zip['city'] == city_name]['state_id'].unique())
+            state_id = st.selectbox("Select State Code",
+                                    uscity_zip[uscity_zip['city'] == city_name]['state_id'].unique())
             if st.button("Get Weather by City"):
                 geo_lookup_city(city_name, state_id, unit)
 
@@ -144,6 +156,7 @@ def main():
             zip_code = st.selectbox("Select Zip Code", uscity_zip['zips'].unique())
             if st.button("Get Weather by Zip Code"):
                 geo_lookup_zip(zip_code, unit)
+
 
 # Run the Streamlit app
 if __name__ == '__main__':
