@@ -94,6 +94,7 @@ def fetch_weather_data(latitude, longitude, unit, city_display):
         wind_speed = weather_data['wind']['speed']
 
         st.subheader(f'Weather Information for {city_display}')
+        display_local_date()
         st.markdown(
             f"""
             **Temperature:** {temp}°  
@@ -114,7 +115,6 @@ def main():
     st.title("Reuben's Weather Information System")
 
     # Display the local date and time from the user's computer
-    display_local_date()
 
     # Sidebar input options
     lookup_choice = st.sidebar.radio("Select lookup method", ["City Name", "Zip Code"])
