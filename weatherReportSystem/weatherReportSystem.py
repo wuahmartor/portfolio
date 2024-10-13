@@ -89,6 +89,21 @@ def fetch_weather_data(latitude, longitude, unit, city_name=None, state_id=None)
             )
         else:
             st.error("City not found. Please try again.")
+# Lookup weather by city
+def geo_lookup_city(city_name, state_id, unit):
+    url = f"http://api.openweathermap.org/geo/1.0/direct?q={city_name},{state_id},US&appid={API_KEY}"
+    response = request(url)
+
+    if response:
+        city_data = response.json()
+        if city_data:
+            city_info = city_data[0]
+            latitude, longitude = city_info['lat'], city_info['lon']
+            fetch_weather_data(latitude, longitude, unit)
+        else:
+            st.error("Invalid city. Please select a valid US city.")
+
+
 
 # Lookup weather by zip code and display city and state
 def geo_lookup_zip(zip_code, unit):
