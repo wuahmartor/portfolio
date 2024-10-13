@@ -19,19 +19,33 @@ def authenticate_user(username, password):
         print("Authentication failed. Invalid username or password.")
         return False
 
-def create_secure_connection():
+
+def create_secure_connection(db_file="ohs_inventory"):
     """Create a secure connection to the SQLite database."""
     try:
-        # Ensure the correct relative path to the database
-        db_path = os.path.join(os.path.dirname(__file__), 'ohs_inventory')
-
-        # Connect to the SQLite database
-        conn = sqlite3.connect(db_path)
+        conn = sqlite3.connect(db_file, check_same_thread=False)  # Allow multi-threaded access
         print("Connected to the database successfully.")
         return conn
     except sqlite3.Error as e:
         st.error(f"Database connection error: {e}")
         return None
+
+
+
+
+# def create_secure_connection():
+#     """Create a secure connection to the SQLite database."""
+#     try:
+#         # Ensure the correct relative path to the database
+#         db_path = os.path.join(os.path.dirname(__file__), 'ohs_inventory')
+#
+#         # Connect to the SQLite database
+#         conn = sqlite3.connect(db_path)
+#         print("Connected to the database successfully.")
+#         return conn
+#     except sqlite3.Error as e:
+#         st.error(f"Database connection error: {e}")
+#         return None
 
 # Displays category items from the 'category' table in the database.
 def display_category_items(conn):

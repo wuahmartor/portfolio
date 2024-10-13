@@ -25,6 +25,7 @@ def update_item(conn, selected_item, new_price, new_qty):
     conn.commit()
 # Establish connection to the database
 # Fetch unique items from the database
+
 items = fetch_unique_items(conn)
 col1, col2 = st.columns(2)
 
