@@ -19,7 +19,7 @@ API_KEY = get_api_key()
 # Function to display the current date and time using Python's datetime
 def display_local_date():
     now = datetime.now()  # Get the current local time
-    st.sidebar(st.write(f"### Current Date and Time: {now.strftime('%Y-%m-%d %H:%M:%S')}"))
+    st.sidebar.write(f"### Current Date and Time: {now.strftime('%Y-%m-%d %H:%M:%S')}")
 
 # Cache the results of HTTP requests to reduce redundant API calls
 @st.cache_data
