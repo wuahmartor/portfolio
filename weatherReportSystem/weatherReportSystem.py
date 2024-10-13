@@ -1,249 +1,135 @@
 import requests
-import json
 import datetime
+import streamlit as st
+import pandas as pd
 
-# Program purpose: Display weather data user for specified location( City or Zip)
-# Author: Reuben Martor
-# Date: 2/18/2023
+st.set_page_config(page_title="US Weather Info", layout="wide")
 
+# Securely read the API key from a file
+@st.cache_data
+def get_api_key(file_path='ap_file.txt'):
+    try:
+        with open(file_path, 'r') as f:
+            api_key = f.read().strip()
+        return api_key
+    except FileNotFoundError:
+        st.error("API key file not found. Please ensure 'ap_file.txt' is present.")
+        return None
+
+API_KEY = get_api_key()
+
+# Load and process city-zip data
+@st.cache_data
+def load_city_zip_data():
+    data = pd.read_csv('uscities_zips.csv')
+
+    # Handle NaN values in the 'zips' column and split by comma
+    data = data.dropna(subset=['zips'])  # Drop rows where 'zips' is NaN
+    data['zips'] = data['zips'].str.split(',').explode().str.strip()  # Split and explode
+
+    # Filter to ensure only valid 5-digit zip codes
+    data = data[data['zips'].str.match(r'^\d{5}$', na=False)]  # Avoid NaN-related errors
+
+    # Drop any remaining duplicates
+    valid_data = data[['city', 'state_id', 'zips']].drop_duplicates()
+    return valid_data
+
+uscity_zip = load_city_zip_data()
+
+# Display the current date and time
 def display_date():
     now = datetime.datetime.now()
-    print(f"Current date and time : {now.strftime('%m-%d-%Y %H:%M:%S')}")
+    st.write(f"**Current date and time:** {now.strftime('%m-%d-%Y %H:%M:%S')}")
 
-def request(url):  # create a connection object to test http connection to location or weather API endpoints
+# Make API request
+def request(url):
     try:
         response = requests.get(url)
-    except:
-        print('HTTP CONNECTION PROBLEM: ', response.status_code)
-    else:
-        print(f'\nHTTP CONNECTION HAS BEEN ESTABLISHED. REQUEST CODE: ', response.status_code)
+        response.raise_for_status()
         return response
+    except requests.exceptions.RequestException as e:
+        st.error(f"HTTP connection issue: {e}")
 
+# Select temperature unit
+def choose_temp(unit):
+    return {'Celsius': 'metric', 'Fahrenheit': 'imperial', 'Kelvin': 'standard'}.get(unit, 'standard')
 
-def welcome_user():  # great user
-    print("\nWelcome to Reuben's weather information system. The program provides weather information of a given city.\
-It is designed for cities in the United States only.\r")
+# Fetch and display weather data with city and state information
+def fetch_weather_data(latitude, longitude, unit, city_name=None, state_id=None):
+    url_weather = f"https://api.openweathermap.org/data/2.5/weather?lat={latitude}&lon={longitude}&appid={API_KEY}&units={unit}"
+    response = request(url_weather)
 
+    if response:
+        weather_data = response.json()
+        if weather_data.get('cod') == 200:
+            temp = weather_data['main']['temp']
+            feel_like = weather_data['main']['feels_like']
+            temp_min = weather_data['main']['temp_min']
+            temp_max = weather_data['main']['temp_max']
+            pressure = weather_data['main']['pressure']
+            humidity = weather_data['main']['humidity']
+            description = weather_data['weather'][0]['description']
+            wind_speed = weather_data['wind']['speed']
 
-def choose_temp(choice):  # ask user to select unit of temperature to display weather data
-    choice = (choice).lower()
-    if choice == 'c':
-        temp_unit = 'metric' # temp in celcius
-    elif choice == 'f':
-        temp_unit = 'imperial' # temp in Fahrenheit
-    elif choice == 'k':
-        temp_unit = 'standard' # temp in kelvin incase someone needs it
-    return temp_unit
+            # Display weather data along with city and state
+            display_date()
+            st.markdown(
+                f"""
+                **City:** {city_name}, {state_id}\n  
+                
+                **Temperature:** {temp}°  
+                **Feels Like:** {feel_like}°  
+                **High Temperature:** {temp_max}°  
+                **Low Temperature:** {temp_min}°  
+                **Pressure:** {pressure} hPa  
+                **Humidity:** {humidity}%  
+                **Description:** {description.capitalize()}  
+                **Wind Speed:** {wind_speed} m/s  
+                """, unsafe_allow_html=True
+            )
+        else:
+            st.error("City not found. Please try again.")
 
+# Lookup weather by zip code and display city and state
+def geo_lookup_zip(zip_code, unit):
+    # Get city and state associated with the selected zip code
+    location = uscity_zip[uscity_zip['zips'] == zip_code].iloc[0]
+    city_name, state_id = location['city'], location['state_id']
 
-def geo_look_up_name(city_name, state_code, api_key, unit):  # get lat & lon for city to obtain weather data
-    url = f"http://api.openweathermap.org/geo/1.0/direct?q={city_name},{state_code},US&appid={api_key}"
+    url = f"http://api.openweathermap.org/geo/1.0/zip?zip={zip_code},US&appid={API_KEY}"
     response = request(url)
-    try:
-        city_data = response.json()
-    except Exception as ex:
-        print('There was a problem making HTTP request to location', ex)
 
+    if response:
+        zip_data = response.json()
+        latitude, longitude = zip_data['lat'], zip_data['lon']
+        fetch_weather_data(latitude, longitude, unit, city_name, state_id)
     else:
-        data = {}  # create a dict to extract dict items within list
-        for item in city_data:
-            data.update(item)
-        city = data['name']
-        latitude = data['lat']
-        longitude = data['lon']
-        state = data['state']
-        print('\nLocation information')
-        print('--------------------')
-        print(f"{city}, {state}")
-        print(f"Latitude: {latitude}")
-        print(f"Longitude: {longitude}")
+        st.error("Invalid zip code. Please select a valid US zip code.")
 
-         # This is a url to obtain weather data for look up by city name
-        url_weather = f"https://api.openweathermap.org/data/2.5/weather?lat={latitude}&lon={longitude}&appid={api_key}&units={unit}"
-        city_name_response = request(url_weather)
-        try:
-            city_weather_data = city_name_response.json()
-
-        except Exception as ex:
-            print('There was a problem making HTTP request to weather source', ex)
-
-        else:
-            if city_weather_data['cod'] == "404":
-                print('No city found')
-            else:
-
-                temp = city_weather_data['main']['temp']
-                feel_like = city_weather_data['main']['feels_like']
-                temp_min = city_weather_data['main']['temp_min']
-                temp_max = city_weather_data['main']['temp_max']
-                pressure = city_weather_data['main']['pressure']
-                humidity = city_weather_data['main']['humidity']
-                cloud_cover = city_weather_data['clouds']['all']
-                if cloud_cover >= 90:
-                    cloud_cover = 'cloudy'
-                elif cloud_cover >= 70:
-                    cloud_cover = "Mostly Cloudy"
-                elif cloud_cover > 30:
-                    cloud_cover = "Partly Cloudy/Partly Sunny"
-                else:
-                    cloud_cover = "Clear"
-                description = city_weather_data['weather'][0]['description']
-                wind_speed = city_weather_data['wind']['speed']
-                display_date()
-                print()
-                print('Current Weather Information')
-                print('--------------------')
-                print(f'Temperature: {temp}{chr(176)}')
-                print(f'Feels Like: {feel_like}{chr(176)}')
-                print(f'High Temperature: {temp_max}{chr(176)}')
-                print(f'Low Temperature: {temp_min}{chr(176)}')
-                print(f'Pressure: {pressure} hPa')
-                print(f'Humidity: {humidity}%')
-                print(f'Clove Cover: {cloud_cover}')
-                print(f'Description: {description}')
-                print(f'Wind speed: {wind_speed} ')
-
-
-def geo_look_up_zip(zip_code, api_key, unit):  # look up weather by city zip code
-    url = f'http://api.openweathermap.org/geo/1.0/zip?zip={zip_code},US&appid={api_key}' #geo look up for zip code
-
-    zip_response = request(url)
-    try:
-        zip_data = zip_response.json() #obtain json (dictionary) to extract lat/lon
-    except Exception as ex:
-        print('There was a problem making HTTP request to location', ex)
-    else:
-        city = zip_data['name']
-        latitude = zip_data['lat']
-        longitude = zip_data['lon']
-        print('Location information')
-        print('--------------------')
-        print(f"{city}")
-        print(f"Latitude: {latitude}")
-        print(f"Longitude: {longitude}")
-
-         # # This is a url to obtain weather data for look up by zip code
-        url_weather = f"https://api.openweathermap.org/data/2.5/weather?lat={latitude}&lon={longitude}&appid={api_key}&units={unit}"
-
-        city_zip_response = request(url_weather)
-        try:
-            city_weather_data = city_zip_response.json()
-        except Exception as ex:
-            print('There was a problem making HTTP request to location', ex)
-        else:
-            if city_weather_data['cod'] == "404":  # double check for connection problem or validate location
-                print('No city found or problem with data source')
-            else:
-                temp = city_weather_data['main']['temp']
-                feel_like = city_weather_data['main']['feels_like']
-                temp_min = city_weather_data['main']['temp_min']
-                temp_max = city_weather_data['main']['temp_max']
-                pressure = city_weather_data['main']['pressure']
-                humidity = city_weather_data['main']['humidity']
-                cloud_cover = city_weather_data['clouds']['all']
-                if cloud_cover >= 90:
-                    cloud_cover = 'cloudy'
-                elif cloud_cover >= 70:
-                    cloud_cover = "Mostly Cloudy"
-                elif cloud_cover > 30:
-                    cloud_cover = "Partly Cloudy/Partly Sunny"
-                else:
-                    cloud_cover = "Clear"
-                description = city_weather_data['weather'][0]['description']
-                wind_speed = city_weather_data['wind']['speed']
-                display_date()
-                print()
-                print('Current Weather Information')
-                print('----------------------')
-                print(f'Temperature: {temp}{chr(176)}')
-                print(f'It feels like: {feel_like}{chr(176)}')
-                print(f'High Temperature: {temp_max}{chr(176)}')
-                print(f'Low Temperature: {temp_min}{chr(176)}')
-                print(f'Pressure: {pressure}hPa')
-                print(f'Humidity: {humidity}%')
-                print(f'Clove Cover: {cloud_cover}')
-                print(f'Description: {description}')
-                print(f'Wind speed: {wind_speed} ')
-
-
+# Streamlit main function
 def main():
-    api_key = "06a941e071d1e5a54da69f7a5a36641d"
+    st.title("US Weather Information System")
+    col1, col2 = st.columns(2)
 
-    prompt = 'y'
-    welcome_user()
-    while prompt.lower() == 'y':
-        try:
-            lookup_choice = input('Type 1 for city name or 2 for zip code or "quit" to exit: ')
-            if lookup_choice.lower() =='quit':
-                print("Thank you for using Reuben's weather application. Goodbye!")
-                exit()
-            elif lookup_choice == 1 or 2:
-                lookup_choice = int(lookup_choice)
-            else:
-                print('Wrong selection')
-        except ValueError:
-            print('invalid input type. ')
+    # Sidebar options
+    lookup_choice = st.sidebar.radio("Select lookup method", ["City Name", "Zip Code"])
+    unit_choice = st.sidebar.selectbox("Select Temperature Unit", ["Celsius", "Fahrenheit", "Kelvin"])
+    unit = choose_temp(unit_choice)
 
-        else:
-            if lookup_choice == 1:
-                try:
-                    city_name = input('Enter City name: '.strip())
-                    if city_name.isdigit():
-                        print('city name must be a string and not a digit(s)')
-                        continue
-                    state_code = input('Enter state code or name. Must be two Letters ex "IA" or "Iowa: '.strip())
-                    if state_code.isdigit():
-                        print('state name or code must be a string and not a digit(s)')
-                    while len(state_code) < 2:
-                        print('state code or name cannot be less than 2 letters.')
-                        state_code = input('Enter state code or name. Must be two Letters ex "IA" or "Iowa: '.strip())
+    if lookup_choice == "City Name":
+        with col1:
+            city_name = st.selectbox("Select City", uscity_zip['city'].unique())
+            state_id = st.selectbox("Select State Code", uscity_zip[uscity_zip['city'] == city_name]['state_id'].unique())
+            if st.button("Get Weather by City"):
+                geo_lookup_city(city_name, state_id, unit)
 
-                    choice = input('Unit for temperature: C for Celsius, F for Fahrenheit, K for Kelvin: ')
-                    choice_list = ['c', 'f', 'k']  # list for input validation
-                    while not choice in choice_list:
-                        print('invalid selection. Temp must be C, F, or K')
-                        choice = input('Unit for temperature: C for Celsius, F for Fahrenheit, K for Kelvin: ')
-                    else:
-                        choose_temp(choice)
-                        geo_look_up_name(city_name, state_code, api_key,
-                                         choose_temp(choice))  # look up weather by city name
-                        prompt = input('Do you want to look up another city ? y/n: ')
-                except Exception as e:
-                    print('unable to obtain weather information for location given, ', e)
+    elif lookup_choice == "Zip Code":
+        with col1:
+            # Ensure only valid 5-digit zip codes are shown
+            zip_code = st.selectbox("Select Zip Code", uscity_zip['zips'].unique())
+            if st.button("Get Weather by Zip Code"):
+                geo_lookup_zip(zip_code, unit)
 
-            elif lookup_choice == 2:
-                try:
-                    city_zip = (input('Enter zip code: '))
-                    while not len(city_zip) == 5:
-                        print('Zip code must be 5 digit numbers')
-                        city_zip = (input('Enter zip code: '))
-                    else:
-                        city_zip = int(city_zip)
-
-                except:
-                    print('You either did not type or you entered some invalid characters')
-                    continue
-                else:
-                    choice = input('Unit for temperature: C for Celsius, F for Fahrenheit, K for Kelvin: ')
-                    choice_list = ['c', 'f', 'k']
-                    while not choice in choice_list:
-                        print('invalid selection. Temp must be C, F, or K')
-                        choice = input('Unit for temperature: C for Celsius, F for Fahrenheit, K for Kelvin: ')
-                    choose_temp(choice)
-                    geo_look_up_zip(city_zip, api_key, choose_temp(choice))
-                    prompt = input('Do you want to look up another city ? y/n: ')
-
-            else:
-                print('Please choose from the options indicated')
-                continue
-
-            if prompt == 'n':
-                print("Thank you for using Reuben's weather application. Goodbye!")
-                exit()
-            # else:
-            #     print('invalid selection! ')
-            #     prompt = input('Do you want to look up another city ? y/n: ')
-
-
+# Run the Streamlit app
 if __name__ == '__main__':
     main()
