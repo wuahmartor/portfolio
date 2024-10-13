@@ -1,10 +1,11 @@
-Welcome to the Streamlit Inventory Management System
+## Welcome to the Streamlit Inventory Management System
 
 This project is a comprehensive Inventory Management System built using Python and Streamlit. 
 It offers both SQL-based search functionality and model-based item recommendations to assist with efficient inventory management.
 The system uses a content-based recommendation algorithm to suggest items similar to the one selected by the user, 
-leveraging TF-IDF vectorization and cosine similarity. The system uses basic authentication for access. 
-basic user with readonly rights 
+leveraging TF-IDF vectorization and cosine similarity. 
+The system uses basic authentication for access. 
+This user has readonly rights 
 username: viewer 
 password: viewer123
 
