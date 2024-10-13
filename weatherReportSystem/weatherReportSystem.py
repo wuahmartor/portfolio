@@ -3,7 +3,7 @@ import datetime
 import streamlit as st
 import os
 # Set up page configuration
-st.set_page_config(page_title="Weather Information System", layout="wide")
+st.set_page_config(page_title="Reuben's Weather Information System", layout="wide")
 
 # Cache the API key retrieval since it doesn't change
 @st.cache_data
