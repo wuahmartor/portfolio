@@ -69,6 +69,7 @@ def main():
     if not st.session_state["logged_in"]:
         # Show login form in the sidebar
         with st.sidebar:
+            st.write("[Reuben's github readme.rm for login info](https://github.com/wuahmartor/portfolio/blob/main/inventoryManagement/main_page.py)")
             st.subheader("Please login to access the system")
 
             # User input fields
