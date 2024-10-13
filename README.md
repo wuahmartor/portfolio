@@ -45,7 +45,9 @@ This project aims to develop a predictive model using machine learning technique
 [Cardiac Event Detection Model](https://github.com/wuahmartor/portfolio/blob/main/heartFailurePredictionModel/heartFailurePrediction.ipynb): Model uses certain health parameters to predict a patient's chance of developing a cardiac even given the patient has a heart failure. 
 
 
-### Placeholder for another Project
+### Medical Supply Inventory Management System
+   [Healthcare Supply Inventory Management System](https://github.com/wuahmartor/portfolio/blob/main/inventoryManagement/main_page.py)
+   [web interface](https://portfolio-nohukkscvph5ayjyt9vwdl.streamlit.app)
 
 ### Placeholder for another Project
 
