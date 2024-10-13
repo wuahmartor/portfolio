@@ -9,7 +9,7 @@ import sqlite3
 # Function to fetch unique items from the database
 # Function to fetch unique items from the database
 # Function to fetch unique items from the database
-conn = create_secure_connection(db_file='ohs_inventory')
+conn = create_secure_connection()
 def fetch_unique_items(conn):
     query = "SELECT DISTINCT description FROM item"
     result = pd.read_sql_query(query, conn)
