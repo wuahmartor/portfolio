@@ -5,7 +5,7 @@ import os
 # Set up page configuration
 st.set_page_config(page_title="Reuben's Weather Information System", layout="wide")
 
-# Cache the API key retrieval since it doesn't change
+# Cache API key retrieval since it doesn't change
 @st.cache_data
 def get_api_key():
     api_key = os.getenv('API_KEY')  # Fetch from environment/secrets
@@ -15,7 +15,18 @@ def get_api_key():
 
 API_KEY = get_api_key()
 
-# Function to display the local date and time using JavaScript
+# Function to display the local date and time from the user's computer
+def display_local_date():
+    st.write("### Local Date and Time (From Your Device)")
+    st.components.v1.html(
+        """
+        <script>
+            const now = new Date();
+            document.write(`<h4>${now.toLocaleString()}</h4>`);
+        </script>
+        """,
+        height=50,
+    )
 
 # Cache the results of HTTP requests to reduce redundant API calls
 @st.cache_data
@@ -32,6 +43,7 @@ def request(url):
 def choose_temp(unit_choice):
     return {'Celsius': 'metric', 'Fahrenheit': 'imperial', 'Kelvin': 'standard'}.get(unit_choice, 'metric')
 
+# Weather lookup and fetch functions remain unchanged
 def geo_lookup_city(city_name, state_code, unit):
     if not API_KEY:
         return
@@ -101,9 +113,12 @@ def fetch_weather_data(latitude, longitude, unit, city_display):
             unsafe_allow_html=True,
         )
 
+# Main function to run the Streamlit app
 def main():
     st.title("Reuben's Weather Information System")
+
     # Display the local date and time from the user's computer
+    display_local_date()
 
     # Sidebar input options
     lookup_choice = st.sidebar.radio("Select lookup method", ["City Name", "Zip Code"])
@@ -134,6 +149,7 @@ def main():
 
 if __name__ == '__main__':
     main()
+
 
 
 # import requests
