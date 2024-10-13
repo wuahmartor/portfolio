@@ -47,6 +47,7 @@ This project aims to develop a predictive model using machine learning technique
 
 ### Medical Supply Inventory Management System
    [Healthcare Supply Inventory Management System](https://github.com/wuahmartor/portfolio/blob/main/inventoryManagement/main_page.py)
+   
    [web interface](https://portfolio-nohukkscvph5ayjyt9vwdl.streamlit.app)
 
 ### Placeholder for another Project
