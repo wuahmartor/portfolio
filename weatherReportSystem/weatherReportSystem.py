@@ -1,6 +1,3 @@
-
-
-
 import requests
 import datetime
 import streamlit as st
@@ -101,15 +98,15 @@ def fetch_weather_data(latitude, longitude, unit, city_display):
         st.subheader(f'Weather Information for {city_display}')
         st.markdown(
             f"""
-            **Temperature:** {temp}°
-            **Feels Like:** {feel_like}°
-            **High Temperature:** {temp_max}°
-            **Low Temperature:** {temp_min}°
-            **Pressure:** {pressure} hPa
-            **Humidity:** {humidity}%
-            **Cloud Cover:** {cloud_cover}%
-            **Description:** {description.capitalize()}
-            **Wind Speed:** {wind_speed} m/s
+            **Temperature:** {temp}°  
+            **Feels Like:** {feel_like}°  
+            **High Temperature:** {temp_max}°  
+            **Low Temperature:** {temp_min}°  
+            **Pressure:** {pressure} hPa  
+            **Humidity:** {humidity}%  
+            **Cloud Cover:** {cloud_cover}%  
+            **Description:** {description.capitalize()}  
+            **Wind Speed:** {wind_speed} m/s  
             """,
             unsafe_allow_html=True,
         )
