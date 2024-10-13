@@ -8,6 +8,7 @@ from sklearn.metrics.pairwise import cosine_similarity
 # SQL-Based Recommendation Functions
 
 # Function to fetch unique items from the database
+conn = create_secure_connection()
 def fetch_unique_items(conn):
     query = "SELECT DISTINCT description FROM item"
     result = pd.read_sql_query(query, conn)
