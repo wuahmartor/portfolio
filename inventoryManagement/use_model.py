@@ -80,7 +80,6 @@ def model_based_recommendations():
     selection_col, display_col = st.columns([2,2])
     with selection_col:
         # Establish database connection and fetch items
-        conn = create_secure_connection('ohs_inventory')
         display_items = display_all_items(conn)
         df = pd.DataFrame(display_items)
         df_items = preprocess_for_model(df)
