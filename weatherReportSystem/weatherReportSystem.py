@@ -94,7 +94,7 @@ def fetch_weather_data(latitude, longitude, unit, city_display):
         wind_speed = weather_data['wind']['speed']
 
         st.subheader(f'Weather Information for {city_display}')
-        display_local_date()
+        st.sidebar.write(display_local_date())
         st.markdown(
             f"""
             **Temperature:** {temp}°  
