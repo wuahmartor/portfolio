@@ -32,7 +32,10 @@ This project is a Movie Recommender System built using Python and Streamlit. The
 
 
 ## Medical Supply Inventory Management System
-[Healthcare Supply Inventory Management System](https://portfolio-nohukkscvph5ayjyt9vwdl.streamlit.app/)
+The system helps to streamline the inventory of a small health clinic to ensure medical supplies are accurately accounted for and reordered on time. The system when complete will detect an notify staff of items nearing expiration dates. The system will also help staff maintain critical supplies to prevent running out.  
+
+[Healthcare supply Inventory System- App](https://portfolio-nohukkscvph5ayjyt9vwdl.streamlit.app/)
+
 [Codes and Details](https://github.com/wuahmartor/portfolio/blob/main/inventoryManagement/main_page.py)
 
 
