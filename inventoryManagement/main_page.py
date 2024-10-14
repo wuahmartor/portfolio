@@ -83,11 +83,21 @@ def main():
         # Show logout option and sidebar details for logged-in users
         with st.sidebar:
             st.sidebar.success(f"Logged in as: {st.session_state['username']} ({st.session_state['role']})")
+
             if st.button("Logout"):
-                # Clear session state and query parameters
-                for key in st.session_state.keys():
-                    del st.session_state[key]
+                # Safely clear session state keys without causing KeyError
+                keys_to_clear = ["logged_in", "username", "role"]
+
+                # Check and delete only if the keys exist
+                for key in keys_to_clear:
+                    if key in st.session_state:
+                        del st.session_state[key]
+
+                # Reset query parameters to reflect the logged-out state
                 st.experimental_set_query_params(logged_in="false")
+
+                # Optionally trigger a page reload to reflect the state change
+                st.experimental_rerun()  # Force a page reload to ensure a fresh state
 
         # Horizontal navigation menu
         choice = option_menu(
