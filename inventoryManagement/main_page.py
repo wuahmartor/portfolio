@@ -54,12 +54,10 @@ def main():
 
     # Check for query parameters to maintain login state
     query_params = st.experimental_get_query_params()
-
-    if "logged_in" not in st.session_state:
-        st.session_state["logged_in"] = query_params.get("logged_in", ["false"])[0] == "true"
+    st.session_state["logged_in"] = query_params.get("logged_in", ["false"])[0] == "true"
 
     if not st.session_state["logged_in"]:
-        # Login form in sidebar if not logged in
+        # Login form in the sidebar
         with st.sidebar:
             st.write("[Visit README for login info](https://github.com/wuahmartor/portfolio/blob/main/inventoryManagement/README.md)")
             st.subheader("Please login to access the system")
@@ -80,23 +78,24 @@ def main():
                 else:
                     st.error("Invalid username or password. Please try again.")
     else:
-        # Show logout option and sidebar details for logged-in users
+        # Logout option and sidebar details for logged-in users
         with st.sidebar:
-            st.sidebar.success(f"Logged in as: {st.session_state['username']} ({st.session_state['role']})")
+            username = st.session_state.get("username", "Unknown User")
+            role = st.session_state.get("role", "Unknown Role")
+
+            st.sidebar.success(f"Logged in as: {username} ({role})")
 
             if st.button("Logout"):
-                # Safely clear session state keys without causing KeyError
-                keys_to_clear = ["logged_in", "username", "role"]
-
-                # Check and delete only if the keys exist
-                for key in keys_to_clear:
+                # Safely clear session state without KeyError
+                for key in ["logged_in", "username", "role"]:
                     if key in st.session_state:
                         del st.session_state[key]
 
-                # Reset query parameters to reflect the logged-out state
+                # Reset query parameters and reload the page
                 st.experimental_set_query_params(logged_in="false")
-                
-        # Horizontal navigation menu
+                st.experimental_rerun()  # Force a page reload
+
+        # Navigation menu
         choice = option_menu(
             menu_title=None,
             options=["View Inventory", "Update Inventory", "Use Model", "Create Order"],
@@ -106,14 +105,15 @@ def main():
             orientation="horizontal"
         )
 
-        # Render sidebar options based on the selected menu and user role
-        render_sidebar(choice, st.session_state["role"])
+        # Use `get()` to safely access session state without KeyError
+        role = st.session_state.get("role", "viewer")  # Default to 'viewer' if not set
+        render_sidebar(choice, role)
 
-        # Display the selected page
+        # Render the selected page
         if choice == "View Inventory":
             view_inventory()
         elif choice == "Update Inventory":
-            if st.session_state["role"] == "admin":
+            if role == "admin":
                 st.write('Use the sidebar to update inventory.')
                 update_inventory()
             else:
@@ -126,5 +126,4 @@ def main():
 # Run the app
 if __name__ == '__main__':
     main()
-
 
