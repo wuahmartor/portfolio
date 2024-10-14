@@ -26,8 +26,8 @@ def authenticate_user(username, password):
 def create_secure_connection():
     """Create a secure connection to the SQLite database."""
     try:
-        db_path = os.path.join(os.path.dirname(__file__), 'ohs_inventory')  # Ensure the correct path
-        conn = sqlite3.connect(db_path, check_same_thread=False)  # Allow multi-threaded access
+        db_path = st.secrets["DATABASE_PATH"]
+        conn = sqlite3.connect(db_path, check_same_thread=False)
         print("Connected to the database successfully.")
         return conn
     except sqlite3.Error as e:
