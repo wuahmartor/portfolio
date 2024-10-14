@@ -95,10 +95,7 @@ def main():
 
                 # Reset query parameters to reflect the logged-out state
                 st.experimental_set_query_params(logged_in="false")
-
-                # Optionally trigger a page reload to reflect the state change
-                st.experimental_rerun()  # Force a page reload to ensure a fresh state
-
+                
         # Horizontal navigation menu
         choice = option_menu(
             menu_title=None,
