@@ -6,8 +6,7 @@ The system uses a content-based recommendation algorithm to suggest items simila
 leveraging TF-IDF vectorization and cosine similarity. 
 The system uses basic authentication for access. 
 This user has readonly rights 
-** username: viewer 
-** password: viewer123
+- username: viewer  password: viewer123
 
 
 Table of Contents
