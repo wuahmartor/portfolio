@@ -4,7 +4,7 @@
 ## About Me
 Hi, I'm Reuben! I am a registered nurse with experience in various nursing specialties. Motivated by the challenges I encountered in healthcare, I earned an MS in Data Science. My goal is to use my technical skills to address and rectify the lapses I've identified in the healthcare industry.
 
-## Contact : wuahmartor@gmail.com    (My Link](https://wuahmartor.github.io/portfolio/)
+## Contact : wuahmartor@gmail.com    [My Link](https://wuahmartor.github.io/portfolio/)
 
 ## 🛠 Skills
 ### Nursing skills 
