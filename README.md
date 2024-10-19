@@ -10,7 +10,9 @@ Throughout my career, I have consistently identified opportunities to enhance bo
 
 I am passionate about data-driven decision-making, continuous learning, and innovation. This makes me an ideal candidate for roles in nursing, healthcare data management, or clinical data analysis, where I can make meaningful contributions to improving healthcare through technology..
 
-## Contact : wuahmartor@gmail.com    [My Link](https://wuahmartor.github.io/portfolio/)
+## Contact : wuahmartor@gmail.com    
+
+[My Link](https://wuahmartor.github.io/portfolio/)
 
 ## 🛠 Skills
 ### Nursing skills 
