@@ -84,4 +84,5 @@ This project aims to develop a predictive model using machine learning technique
 
 ## Loan Prediction 
 [Code and details](https://github.com/wuahmartor/portfolio/blob/main/loanPrediction/loan_predictor.ipynb)
+[readme]()
 
