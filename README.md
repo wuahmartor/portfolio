@@ -82,5 +82,6 @@ This project aims to develop a predictive model using machine learning technique
 [Codes and Details](https://github.com/wuahmartor/portfolio/blob/main/heartFailurePredictionModel/heartFailurePrediction.ipynb) 
 
 
-## Placeholder for future Projects
+## Loan Prediction 
+[Code and details](https://github.com/wuahmartor/portfolio/blob/main/loanPrediction/loan_predictor.ipynb)
 
