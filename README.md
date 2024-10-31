@@ -1,15 +1,32 @@
-# Welcome to Reuben's Portfolio
+## Reuben W. Martor 
 
 ![recent photo](https://github.com/wuahmartor/portfolio/blob/main/reuben_photo.png?raw=true)
 ## About Me
-Hi, I'm Reuben! I am a registered nurse with experience in various nursing specialties. Motivated by the challenges I encountered in healthcare, I earned an MS in Data Science. My goal is to use my technical skills to address and rectify the lapses I've identified in the healthcare industry.
+I am a registered nurse with diverse experience across multiple nursing specialties. My journey into information technology began in 2004, during my time as a refugee in Ghana, where I developed a strong foundation in computer hardware, networking, and system administration. This led me to pursue a degree in Computer Science and Economics in Nigeria. However, my commitment to family took precedence, and I transferred to Liberia before immigrating to the United States, where I earned a Bachelor of Science in Nursing.
+
+While completing my RN-BSN, my interest in nursing informatics was sparked, giving me a new perspective on the potential of technology to transform healthcare. I became deeply passionate about using technological solutions to enhance patient care and improve healthcare outcomes. This drive led me to pursue a Master of Science in Data Science, where I gained advanced skills to leverage data and technology for quality improvement in healthcare systems.
+
+Throughout my career, I have consistently identified opportunities to enhance both patient care and operational efficiency using technology. My goal is to merge my nursing expertise with my data science skills to tackle inefficiencies and contribute to better health outcomes.
+
+I am passionate about data-driven decision-making, continuous learning, and innovation. This makes me an ideal candidate for roles in nursing, healthcare data management, or clinical data analysis, where I can make meaningful contributions to improving healthcare through technology..
+
+## Contact : wuahmartor@gmail.com    
+
+[My Link](https://wuahmartor.github.io/portfolio/)
 
 ## 🛠 Skills
 ### Nursing skills 
 various settings: Acute, long-term care facilities, Home Health, Occupational, and Medical Case management. 
     
 ### Technology skills
-R, SQL, Machine Learning, PowerBI, Tableau, MS Office, Jupyter Notebook, Basic HTML, Streamlit, Computer network, Hardware, Windows Server Active Directory concepts (Microsoft Certified System Engineer on Windows Server 2003) and more.
+
+Programming Languages: Working knowledge of R, Python, SQL, HTML
+Data Science & Machine Learning: Familiar with Data Mining, Data Preparation, Data Analysis, and AI/Machine Learning concepts
+Data Visualization: Proficient in Power BI, Tableau, R, Python, and Excel for visualizing data
+Software & Tools: Experience with Jupyter Notebook, Visual Studio Code, MS Office Suite, and Streamlit
+APIs: Basic experience with APIs for data integration and automation
+Systems & Networking: Solid understanding of Computer Networking, Hardware, and Windows Server Active Directory (Microsoft Certified Systems Engineer - Windows Server 2003)
+Cloud & Infrastructure: Familiar with server management and Active Directory concepts
 
 ## Projects Undertaken:
 
