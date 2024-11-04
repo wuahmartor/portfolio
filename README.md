@@ -86,3 +86,7 @@ This project aims to develop a predictive model using machine learning technique
 [Code and details](https://github.com/wuahmartor/portfolio/blob/main/loanPrediction/loan_predictor.ipynb)
 [readme]()
 
+
+## Hospital Excess Readmission Ratio Prediction Model 
+
+[codes and details](https://github.com/wuahmartor/portfolio/commit/3c2a9a34cf0ad38e062d9eb800c23e0a6f0f218b)
