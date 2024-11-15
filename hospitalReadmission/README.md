@@ -4,6 +4,12 @@
 To analyze and model hospital readmission rates to identify key factors contributing to high readmission and provide actionable insights to
 healthcare facilities.
 
+Excess hospital readmissions present a significant challenge for healthcare providers, affecting both patient outcomes and financial performance. This project aims to develop a predictive model that identifies hospitals at risk of high readmission rates, enabling targeted interventions to improve care quality, optimize resource allocation, and reduce costs associated with readmissions. By addressing this issue, hospitals can not only enhance patient satisfaction but also avoid penalties under the Hospital Readmissions Reduction Program (HRRP)
+Background/History
+
+Hospital readmission rates have long been a critical indicator of care quality. Under the HRRP, hospitals with higher-than-expected readmissions face financial penalties, making it essential for them to improve care coordination and discharge planning. This initiative aligns with broader efforts to improve healthcare quality and reduce costs under the Affordable Care Act. Historical data on hospital readmissions is leveraged in this project to analyze key factors influencing readmission rates and to develop actionable strategies for improvement.
+
+
 ## Summary
 Hospital readmission is a critical issue impacting both patient care and healthcare costs. This project explores a dataset on hospital readmissions, 
 with features like the number of discharges, predicted and expected readmission rates, and excess readmission ratio.
