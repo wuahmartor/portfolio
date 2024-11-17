@@ -90,3 +90,13 @@ This project aims to develop a predictive model using machine learning technique
 ## Hospital Excess Readmission Ratio Prediction Model 
 
 [codes and details](https://github.com/wuahmartor/portfolio/blob/main/hospitalReadmission/hospitalReadmission.ipynb)
+
+## Word Frequency Counter
+This Streamlit application allows users to analyze word frequency in a text
+paragraph or an uploaded file. The program uses a custom tokenization
+model based on Python’s regular expressions (re) to process text,
+normalize it, and count word frequencies. It supports multiple file formats,
+provides word frequency counts, and displays the results in a neatly
+formatted table with sortable and wider columns for better readability.
+[codes and details](https://github.com/wuahmartor/portfolio/blob/main/wordCounter/wordCounter.py)
+[Web App](https://portfolio-mmzmnye65e245nw677mbzz.streamlit.app/) 
