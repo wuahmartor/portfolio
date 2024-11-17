@@ -100,3 +100,13 @@ provides word frequency counts, and displays the results in a neatly
 formatted table with sortable and wider columns for better readability.
 [codes and details](https://github.com/wuahmartor/portfolio/blob/main/wordCounter/wordCounter.py)
 [Web App](https://portfolio-mmzmnye65e245nw677mbzz.streamlit.app/) 
+
+
+## Diabetes Risk Predictor 
+
+The project involves predicting diabetes outcomes
+using a structured machine learning pipeline. The
+dataset includes patient-level features such as
+glucose levels, blood pressure, BMI, and age, which
+are critical indicators for diabetes diagnosis.
+[codes and details](https://github.com/wuahmartor/portfolio/blob/main/diabetesRiskPredictor/diabetes_predictor.ipynb)
