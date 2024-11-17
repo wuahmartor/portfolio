@@ -12,7 +12,7 @@ I am passionate about data-driven decision-making, continuous learning, and inno
 
 ## Contact : wuahmartor@gmail.com    
 
-[My Link](https://wuahmartor.github.io/portfolio/)
+[My Link](https://reubenmartor.my.canva.site/reuben-w-martor)
 
 ## 🛠 Skills
 ### Nursing skills 
