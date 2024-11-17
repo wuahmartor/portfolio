@@ -83,11 +83,27 @@ This project aims to develop a predictive model using machine learning technique
 
 
 ## Loan Prediction 
+
+This project leverages data from a loan approval
+dataset to build a predictive model that can
+classify loan applications as either approved or
+rejected. By following this approach, the program
+explores different machine learning models and
+hyperparameter tuning to achieve optimal
+performance
+
 [Code and details](https://github.com/wuahmartor/portfolio/blob/main/loanPrediction/loan_predictor.ipynb)
 [readme]()
 
 
 ## Hospital Excess Readmission Ratio Prediction Model 
+
+Hospital readmission is a critical issue impacting both
+patient care and healthcare costs. This project
+explores a dataset on hospital readmissions, with
+features like the number of discharges, predicted and
+expected readmission rates. A regression model is
+developed to predict excess readmission ratio.
 
 [codes and details](https://github.com/wuahmartor/portfolio/blob/main/hospitalReadmission/hospitalReadmission.ipynb)
 
